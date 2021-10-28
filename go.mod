@@ -1,4 +1,4 @@
-module github.com/butbetter-id/validate
+module github.com/env-io/validate
 
 go 1.16
 

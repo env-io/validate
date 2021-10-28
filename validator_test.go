@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/butbetter-id/validate"
+	"github.com/env-io/validate"
 	"github.com/stretchr/testify/assert"
 )
 
