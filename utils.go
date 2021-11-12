@@ -2,6 +2,7 @@ package validate
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"reflect"
 	"regexp"
@@ -136,4 +137,31 @@ func removeLastDot(str string) string {
 		return str[:idx]
 	}
 	return str
+}
+
+func ValidPhone(text string) (p string, e error) {
+	reg, _ := regexp.Compile("[^0-9]+")
+	p = reg.ReplaceAllString(text, "")
+
+	if len(p) <= 6 {
+		e = errors.New("invalid format phone")
+		return
+	}
+
+	prefix := string(p[0:2])
+	if prefix == "08" {
+		p = strings.Replace(p, "08", "628", 1)
+	} else {
+		prefix2 := string(p[0:1])
+		if prefix2 == "8" {
+			p = strings.Replace(p, "8", "628", 1)
+		}
+	}
+
+	fp := string(p[0:2])
+	if fp != "62" {
+		e = errors.New("invalid format phone")
+	}
+
+	return
 }
